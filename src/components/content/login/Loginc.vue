@@ -11,7 +11,6 @@
     :disabled="disabled"
     :btnTitle="btnTitle"
     :error="errors.phone"
-    
     @getCode="getCode"
   />
   <!-- 验证码 -->
@@ -34,6 +33,8 @@
 
 <script>
 import LoginItem from './LoginItem';
+
+//这里phone 想要取得input value需要input将value发送出来
 export default {
   name: "login",
   data() {
@@ -54,12 +55,26 @@ export default {
       // console.log('----')
       if (this.getPhoneIsCorrect()) {
         //网络请求发送验证码
-        console.log('---')
+        this.countTimer();
+        // console.log('---')
       }
     },
+    countTimer(){
+      let time = 60
+      const timer = setInterval(()=>{
+        if(time === 0){
+          clearInterval(timer)
+          this.btnTitle = "获取验证码"
+          this.disabled = false
+        }else {
+          this.btnTitle = --time + 's'
+          this.disabled = true
+        }
+      },1000)
+    },
     getPhoneIsCorrect(){
-      console.log('---')
-      console.log(this.phone)
+      // console.log('---')
+      // console.log(this.phone)
       if (/^1[0-9]{10}$/.test(this.phone)){
         this.errors = {}
         console.log(this.errors)
