@@ -2,21 +2,23 @@
   <div class="text_group">
     <!-- 组件结构 -->
     <!-- 组件容器 -->
-    <div class="input_group" :class="{'is-invalid':error}">
+    <div class="input_group" :class="{'is-invalid': error}">
+        <!-- :value="value" -->
       <!-- 输入框 -->
       <input
         :type="type"
-        :value="value"
         :placeholder="placeholder"
         :name="name"
-        @input="$emit('input',$event.target.value)"
+        :error="error"
+        @input="$emit('input', $event.target.value)"
+        
       >
       <!-- 输入框后面的按钮 -->
-      <button v-if="btnTitle" :disabled="disabled" @click="$emit('btnClick')">{{btnTitle}}</button>
+      <button v-if="btnTitle" :disabled="disabled" @click="getCode">{{btnTitle}}</button>
       
     </div>
     <!-- 错误提醒 -->
-    <div v-if="error" class="invalid-feedback">{{error}}</div>
+    <div v-if="error" class="invalid-feedback" >{{error}}</div>
   </div>
 </template>
 
@@ -34,6 +36,14 @@ export default {
     btnTitle: String,
     disabled: Boolean,
     error: String
+  },
+  methods:{
+    getCode(){
+      this.$emit('getCode')
+    }
+  },
+  mounted(){
+    // console.log(this.error,this.type)
   }
 };
 </script>
@@ -67,5 +77,6 @@ export default {
 .invalid-feedback {
   color: red;
   padding-top: 5px;
+
 }
 </style>

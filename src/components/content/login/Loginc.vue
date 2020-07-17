@@ -3,7 +3,7 @@
     <div class="logo">
     <img src="~/assets/images/logo/logo.jpg" alt="my login image" />
   </div>
-  <!-- 手机号 -->
+  <!-- 手机号:value="phone" -->
   <login-item
     type="number"
     v-model="phone"
@@ -11,11 +11,12 @@
     :disabled="disabled"
     :btnTitle="btnTitle"
     :error="errors.phone"
-    @btnClick="getVerifyCode"
+    
+    @getCode="getCode"
   />
   <!-- 验证码 -->
   <login-item type="number" v-model="verifyCode" placeholder="验证码"  />
-
+<!-- <div>{{error}}</div> -->
   <!-- 用户服务协议 -->
   <div class="login_des">
     <p>
@@ -25,7 +26,7 @@
   </div>
   <!-- 登录按钮 -->
   <div class="login_btn">
-    <button :disabled="isClick" @click="handleLogin">登录</button>
+    <button >登录</button>
   </div>
 </div>
     
@@ -47,6 +48,28 @@ export default {
  
   components: {
     LoginItem
+  },
+  methods:{
+    getCode(){
+      // console.log('----')
+      if (this.getPhoneIsCorrect()) {
+        //网络请求发送验证码
+        console.log('---')
+      }
+    },
+    getPhoneIsCorrect(){
+      console.log('---')
+      console.log(this.phone)
+      if (/^1[0-9]{10}$/.test(this.phone)){
+        this.errors = {}
+        console.log(this.errors)
+        return true
+      }else{
+        this.errors = {phone: "请输入正确的手机号"}
+        console.log(this.errors)
+        return false
+      }
+    }
   }
 };
 </script>
