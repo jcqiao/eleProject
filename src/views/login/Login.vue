@@ -1,10 +1,5 @@
 <template>
   <div class="login">
-    <div class="logo">
-      <!-- <img src="~assets/images/logo/logo.jpg" alt="logo"> -->
-      <img src="~/assets/images/logo/logo.jpg" alt="">
-    </div>
-    
     <loginc></loginc>
   </div>
 </template>
