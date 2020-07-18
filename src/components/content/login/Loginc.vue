@@ -54,8 +54,20 @@ export default {
     getCode(){
       // console.log('----')
       if (this.getPhoneIsCorrect()) {
-        //网络请求发送验证码
-        this.countTimer();
+        //网络请求发送验证码 未买第三方api
+        //这种出现跨域问题 
+        // this.$axios.post('https://ele-interface.herokuapp.com/api/posts/sms_send')
+        // this.$axios.post('/api/posts/sms_send',{
+        //   sid: "",
+        //   token: "",
+        //   appid:"",
+        //   templateid: "",
+        //   phone: this.phone
+        // }).then(res => {
+        //   console.log(res);
+        //   this.countTimer;
+        // })
+        this.countTimer()
         // console.log('---')
       }
     },
