@@ -14,8 +14,7 @@
     @getCode="getCode"
   />
   <!-- 验证码 -->
-  <login-item type="number" v-model="verifyCode" placeholder="验证码"  />
-<!-- <div>{{error}}</div> -->
+  <login-item type="number" v-model="verifyCode" placeholder="验证码" :error="errors.code" />
   <!-- 用户服务协议 -->
   <div class="login_des">
     <p>
@@ -25,7 +24,7 @@
   </div>
   <!-- 登录按钮 -->
   <div class="login_btn">
-    <button >登录</button>
+    <button :disabled="isclick" @click="loginClick">登录</button>
   </div>
 </div>
     
@@ -50,24 +49,36 @@ export default {
   components: {
     LoginItem
   },
+  computed:{
+    isclick(){
+      if (!this.phone || !this.verifyCode) {
+        return true
+      }else {
+        return false
+      }
+    }
+  },
   methods:{
     getCode(){
-      // console.log('----')
+      console.log('----')
       if (this.getPhoneIsCorrect()) {
+        console.log('++++')
         //网络请求发送验证码 未买第三方api
         //这种出现跨域问题 
         // this.$axios.post('https://ele-interface.herokuapp.com/api/posts/sms_send')
-        // this.$axios.post('/api/posts/sms_send',{
-        //   sid: "",
-        //   token: "",
-        //   appid:"",
-        //   templateid: "",
-        //   phone: this.phone
-        // }).then(res => {
-        //   console.log(res);
-        //   this.countTimer;
-        // })
-        this.countTimer()
+        this.$axios
+          .post("/api/posts/sms_send", {
+            sid: "70e9281073fe5e1546b7f657cae73897",
+            token: "d1a5431e19d2005c3286794786111d79",
+            appid: "099a1aedcf19400a9eb83d857eb7b845",
+            templateid: "522016",
+            phone: this.phone
+          })
+          .then(res => {
+            console.log(res);
+            this.countTimer()
+          });
+        // this.countTimer()
         // console.log('---')
       }
     },
@@ -96,8 +107,31 @@ export default {
         console.log(this.errors)
         return false
       }
-    }
-  }
+    },
+    loginClick(){
+      console.log('+++++++')
+      //1 取消错误提醒
+      this.errors = {}
+      this.$router.push("/");
+      //2 发送请求
+      //  this.$axios
+      //   .post("/api/posts/sms_back", {
+      //     phone: this.phone,
+      //     code: this.verifyCode
+      //   })
+      //   .then(res => {
+      //     // console.log(res);
+      //     // 检验成功 设置登录状态并且跳转到/
+      //     localStorage.setItem("ele_login", true);
+      //     this.$router.push("/");
+      //   })
+      //   .catch(err => {
+      //     // 返回错误信息
+      //     this.errors = {
+      //       code: err.response.data.msg
+      //     };
+      //   });
+  }}
 };
 </script>
 
