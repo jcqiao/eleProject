@@ -5,21 +5,44 @@ import Index from '../views/Index'
 //路由懒加载
 const Login = () => import("../views/login/Login.vue")
 
+const Home = () => import("../views/home/Home.vue")
+const Order = () => import("../views/order/Order.vue")
+const Profile = () => import("../views/profile/Profile.vue")
+
 Vue.use(VueRouter)
 
   const routes = [
     {
       path: '/',
-      redirect: '/index'
+      component: () => import('../views/Index.vue'),
+      children:[
+        {
+          path: '',
+          redirect: '/home'
+        },
+        {
+          path: 'home',
+          component: () => import("../views/home/Home.vue")
+        },
+        {
+          path: 'order',
+          component: () => import("../views/order/Order.vue")
+        },
+        {
+          path: 'profile',
+          component: () => import("../views/profile/Profile.vue")
+        },
+      ]
     },
-  {
-    path: '/index',
-    component: Index
-  },
-  {
-    path: '/login',
-    component: Login
-  }
+   
+    {
+      path: '/index',
+      component: () => import('../views/Index.vue')
+    },
+    {
+      path: '/login',
+      component: Login
+    }
 ]
 
 const router = new VueRouter({
