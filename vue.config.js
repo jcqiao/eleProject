@@ -9,7 +9,8 @@ module.exports = {
         'views': '@/views',
         
       }
-    }
+    },
+    devtool: 'source-map'
   },
   devServer: {
     open: true,
