@@ -1,12 +1,12 @@
 <template>
-  <div class="index">index page
-    <router-view></router-view>
+  <div class="order">
+    订单
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Index'
+  name: 'Order'
 }
 </script>
 
