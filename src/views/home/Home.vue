@@ -19,7 +19,7 @@ export default {
   name: "Home",
   computed: {
     getLocation() {
-      return this.$store.getters.location;
+      return this.$store.getters.address;
     }
   },
   methods: {
