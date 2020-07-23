@@ -3,7 +3,7 @@
     <nav-item>
       <div slot="left">
         <i class="fa fa-chevron-left"></i>
-        <button class="btn">返回</button>
+        <button class="btn" @click="goback">返回</button>
       </div>
       <div slot="center">选择收获地址</div>
     </nav-item>
@@ -16,6 +16,11 @@ export default {
   name: "Navbar",
   components: {
     NavItem
+  },
+  methods: {
+    goback() {
+      this.$router.go(-1);
+    }
   }
 };
 </script>
