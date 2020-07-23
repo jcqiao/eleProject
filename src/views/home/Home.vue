@@ -3,7 +3,7 @@
     <div class="header">
       <div class="address_map" @click="address">
         <i class="fa fa-map-marker"></i>
-        <span>{{getLocation}}</span>
+        <span>{{getAddress}}</span>
         <i class="fa fa-sort-desc"></i>
       </div>
       <div class="shop_search">
@@ -18,14 +18,25 @@
 export default {
   name: "Home",
   computed: {
-    getLocation() {
+    getAddress() {
       return this.$store.getters.address;
+    },
+    getCity() {
+      return (
+        this.$store.getters.location.addressComponent.city ||
+        this.$store.getters.location.addressComponent.province
+      );
     }
   },
   methods: {
     //点击地址跳转到地址页面
     address() {
-      this.$router.push("/address");
+      this.$router.push({
+        name: "address",
+        params: {
+          city: this.getCity
+        }
+      });
     }
   }
 };
