@@ -4,8 +4,8 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 const types = {
-  SET_LOCATION,
-  SET_ADDRESS
+  SET_LOCATION: "SET_LOCATION",
+  SET_ADDRESS: "SET_ADDRESS"
 }
 
 const state = {
