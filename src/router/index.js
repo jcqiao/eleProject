@@ -22,18 +22,22 @@ const routes = [
       },
       {
         path: 'home',
+        name: 'home',
         component: () => import("../views/home/Home.vue")
       },
       {
         path: 'order',
+        name: 'order',
         component: () => import("../views/order/Order.vue")
       },
       {
         path: 'profile',
+        name: 'profile',
         component: () => import("../views/profile/Profile.vue")
       },
       {
         path: 'address',
+        name: 'address',
         component: () => import("../views/address/Address.vue")
       }
     ]
