@@ -11,38 +11,42 @@ const Profile = () => import("../views/profile/Profile.vue")
 
 Vue.use(VueRouter)
 
-  const routes = [
-    {
-      path: '/',
-      component: () => import('../views/Index.vue'),
-      children:[
-        {
-          path: '',
-          redirect: '/home'
-        },
-        {
-          path: 'home',
-          component: () => import("../views/home/Home.vue")
-        },
-        {
-          path: 'order',
-          component: () => import("../views/order/Order.vue")
-        },
-        {
-          path: 'profile',
-          component: () => import("../views/profile/Profile.vue")
-        },
-      ]
-    },
-   
-    {
-      path: '/index',
-      component: () => import('../views/Index.vue')
-    },
-    {
-      path: '/login',
-      component: Login
-    }
+const routes = [
+  {
+    path: '/',
+    component: () => import('../views/Index.vue'),
+    children: [
+      {
+        path: '',
+        redirect: '/home'
+      },
+      {
+        path: 'home',
+        component: () => import("../views/home/Home.vue")
+      },
+      {
+        path: 'order',
+        component: () => import("../views/order/Order.vue")
+      },
+      {
+        path: 'profile',
+        component: () => import("../views/profile/Profile.vue")
+      },
+      {
+        path: 'address',
+        component: () => import("../views/address/Address.vue")
+      }
+    ]
+  },
+
+  {
+    path: '/index',
+    component: () => import('../views/Index.vue')
+  },
+  {
+    path: '/login',
+    component: Login
+  }
 ]
 
 const router = new VueRouter({
