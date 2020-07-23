@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <div class="header">
-      <div class="address_map">
+      <div class="address_map" @click="address">
         <i class="fa fa-map-marker"></i>
         <span>{{getLocation}}</span>
         <i class="fa fa-sort-desc"></i>
@@ -20,6 +20,12 @@ export default {
   computed: {
     getLocation() {
       return this.$store.getters.location;
+    }
+  },
+  methods: {
+    //点击地址跳转到地址页面
+    address() {
+      this.$router.push("/address");
     }
   }
 };
