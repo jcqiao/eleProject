@@ -26,20 +26,23 @@ const mutations = {
     }
   },
   [types.SET_ADDRESS](state, address) {
+
     if (address) {
       state.address = address
     } else {
-      state.address = null
+      state.address = ""
     }
   }
 }
 
 const actions = {
   setLocation: ({ commit }, location) => {
+    // console.log(location)
     commit(types.SET_LOCATION, location)
   },
   setAddress: ({ commit }, address) => {
-    commit(types.SET_LOCATION, address)
+    console.log(address)
+    commit(types.SET_ADDRESS, address)
   }
 }
 
