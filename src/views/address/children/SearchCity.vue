@@ -1,10 +1,25 @@
 <template>
-  <div class="search">search</div>
+  <div class="search">
+    <div class="city">
+      {{city}}
+      <i class="fa fa-angle-down"></i>
+    </div>
+    <i class="fa fa-search"></i>
+    <input type="text" v-model="value" placeholder="住宅/公司" />
+  </div>
 </template>
 
 <script>
 export default {
-  name: "SearchCity"
+  name: "SearchCity",
+  props: {
+    city: ""
+  },
+  data() {
+    return {
+      value: ""
+    };
+  }
 };
 </script>
 
