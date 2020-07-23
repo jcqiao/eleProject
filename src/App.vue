@@ -13,6 +13,7 @@ export default {
   },
   methods: {
     getLocation() {
+      const _this = this;
       AMap.plugin("AMap.Geolocation", function() {
         var geolocation = new AMap.Geolocation({
           // 是否使用高精度定位，默认：true
@@ -33,7 +34,19 @@ export default {
         function onError(data) {
           // 定位出错
           console.log(data);
+          _this.getLngLatLocation();
         }
+      });
+    },
+    getLngLatLocation() {
+      AMap.plugin("AMap.CitySearch", function() {
+        var citySearch = new AMap.CitySearch();
+        citySearch.getLocalCity(function(status, result) {
+          if (status === "complete" && result.info === "OK") {
+            // 查询成功，result即为当前所在城市信息
+            console.log(result);
+          }
+        });
       });
     }
   }
