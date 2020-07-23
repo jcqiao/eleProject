@@ -17,7 +17,31 @@ const getters = {
   location: state => state.location,
   address: state => state.address
 }
+const mutations = {
+  [types.SET_LOCATION](state, location) {
+    if (location) {
+      state.location = location
+    } else {
+      state.location = null
+    }
+  },
+  [types.SET_ADDRESS](state, address) {
+    if (address) {
+      state.address = address
+    } else {
+      state.address = null
+    }
+  }
+}
 
+const actions = {
+  setLocation: ({ commit }, location) => {
+    commit(types.SET_LOCATION, location)
+  },
+  setAddress: ({ commit }, address) => {
+    commit(types.SET_LOCATION, address)
+  }
+}
 
 
 export default new Vuex.Store({
