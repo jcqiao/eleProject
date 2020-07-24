@@ -5,7 +5,7 @@
         <i class="fa fa-search"></i>
         <input type="text" placeholder="城市" v-model="value" />
       </div>
-      <button>取消</button>
+      <button @click="$router.go(-1)">取消</button>
     </div>
     <location :address="address"></location>
   </div>
