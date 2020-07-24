@@ -5,7 +5,7 @@
         <i class="fa fa-search"></i>
         <input type="text" placeholder="城市" v-model="value" />
       </div>
-      <button @click="$router.go(-1)">取消</button>
+      <button @click="$router.go(-1) ">取消</button>
     </div>
     <location :address="address"></location>
   </div>
@@ -30,6 +30,20 @@ export default {
         this.$store.getters.location.addressComponent.city ||
         this.$store.getters.location.addressComponent.province
       );
+    }
+  },
+  created() {
+    this.getCityInfo();
+  },
+  methods: {
+    getCityInfo() {
+      this.$axios("/api/posts/cities")
+        .then(res => {
+          console.log(res.data);
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
   }
 };
