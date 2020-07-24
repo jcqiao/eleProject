@@ -14,8 +14,8 @@
     <location :address="address"></location>
 
     <div class="area">
-      <ul v-for="(item,index) in addressLists" :key="index">
-        <li>
+      <ul v-for="(item,index) in addressLists " :key="index">
+        <li @click="getNewAddress(item)">
           <h4>{{item.name}}</h4>
           <p>{{item.district}}{{item.address}}</p>
         </li>
@@ -68,6 +68,14 @@ export default {
           _this.addressLists = result.tips;
         });
       });
+    },
+    getNewAddress(item) {
+      // console.log(item);
+      this.$store.dispatch(
+        "setAddress",
+        item.district + item.address + item.name
+      );
+      this.$router.push("/home");
     }
   }
 };
