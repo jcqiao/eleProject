@@ -8,20 +8,25 @@
       <button @click="$router.go(-1) ">取消</button>
     </div>
     <location :address="address"></location>
+    <city-item :hotCities="cityInfo.hotCities" :keys="keys"></city-item>
   </div>
 </template>
 
 <script>
 import Location from "./Location";
+import CityItem from "./cityChildren/CityItem.vue";
 
 export default {
   name: "City",
   components: {
-    Location
+    Location,
+    CityItem
   },
   data() {
     return {
-      value: ""
+      value: "",
+      cityInfo: {},
+      keys: []
     };
   },
   computed: {
@@ -37,9 +42,15 @@ export default {
   },
   methods: {
     getCityInfo() {
+      const _this = this;
       this.$axios("/api/posts/cities")
         .then(res => {
           console.log(res.data);
+          _this.cityInfo = res.data;
+          _this.keys = Object.keys(res.data);
+          _this.keys.pop();
+          _this.keys.sort();
+          // console.log(_this.keys);
         })
         .catch(err => {
           console.log(err);
