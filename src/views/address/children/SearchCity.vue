@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="search">
-      <span class="city sea-item">
+      <span class="city sea-item" @click="cityChange">
         {{city}}
         <i class="fa fa-angle-down"></i>
       </span>
@@ -76,6 +76,9 @@ export default {
         item.district + item.address + item.name
       );
       this.$router.push("/home");
+    },
+    cityChange() {
+      this.$router.push("/city");
     }
   }
 };
