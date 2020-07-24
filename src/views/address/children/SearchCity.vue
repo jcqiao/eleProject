@@ -9,21 +9,28 @@
         <i class="fa fa-search"></i>
         <input type="text" v-model="value" placeholder="住宅/公司" />
       </div>
-      <div>
-        <ul v-for="(item,index) in addressLists" :key="index">
-          <li>
-            <h4>{{item.name}}</h4>
-            <p>{{item.district}}{{item.address}}</p>
-          </li>
-        </ul>
-      </div>
+    </div>
+
+    <location :address="address"></location>
+
+    <div class="area">
+      <ul v-for="(item,index) in addressLists" :key="index">
+        <li>
+          <h4>{{item.name}}</h4>
+          <p>{{item.district}}{{item.address}}</p>
+        </li>
+      </ul>
     </div>
   </div>
 </template>
 
 <script>
+import Location from "./Location";
 export default {
   name: "SearchCity",
+  components: {
+    Location
+  },
   props: {
     city: ""
   },
@@ -32,6 +39,11 @@ export default {
       value: "",
       addressLists: []
     };
+  },
+  computed: {
+    address() {
+      return this.$store.getters.location.formattedAddress;
+    }
   },
   watch: {
     value() {
@@ -95,5 +107,22 @@ export default {
   outline: none;
   background: inherit;
   /* text-align: center; */
+}
+.area {
+  margin-top: 16px;
+  background: #fff;
+}
+.area li {
+  border-bottom: 1px solid #ddd;
+  /* line-height: 30px; */
+  padding: 8px 16px;
+}
+.area li h4 {
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 5px;
+}
+.area li p {
+  color: #aaa;
 }
 </style>
