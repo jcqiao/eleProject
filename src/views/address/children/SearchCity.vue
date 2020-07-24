@@ -1,12 +1,22 @@
 <template>
-  <div class="search">
-    <span class="city sea-item">
-      {{city}}
-      <i class="fa fa-angle-down"></i>
-    </span>
-    <div class="input sea-item">
-      <i class="fa fa-search"></i>
-      <input type="text" v-model="value" placeholder="住宅/公司" />
+  <div>
+    <div class="search">
+      <span class="city sea-item">
+        {{city}}
+        <i class="fa fa-angle-down"></i>
+      </span>
+      <div class="input sea-item">
+        <i class="fa fa-search"></i>
+        <input type="text" v-model="value" placeholder="住宅/公司" />
+      </div>
+      <div>
+        <ul v-for="(item,index) in addressLists" :key="index">
+          <li>
+            <h4>{{item.name}}</h4>
+            <p>{{item.district}}{{item.address}}</p>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </template>
@@ -19,8 +29,34 @@ export default {
   },
   data() {
     return {
-      value: ""
+      value: "",
+      addressLists: []
     };
+  },
+  watch: {
+    value() {
+      this.valueChange();
+    }
+  },
+  methods: {
+    valueChange() {
+      const _this = this;
+      // console.log(this.value);
+      //高德API 输入提示与POI搜索
+      AMap.plugin("AMap.Autocomplete", function() {
+        // 实例化Autocomplete
+        var autoOptions = {
+          //city 限定城市，默认全国
+          city: _this.city
+        };
+        var autoComplete = new AMap.Autocomplete(autoOptions);
+        autoComplete.search(_this.value, function(status, result) {
+          // 搜索成功时，result即是对应的匹配数据
+          // console.log(result);
+          _this.addressLists = result.tips;
+        });
+      });
+    }
   }
 };
 </script>
@@ -28,21 +64,28 @@ export default {
 <style scoped>
 .search {
   width: 100%;
+  height: 44px;
   padding: 5px 10px;
   display: flex;
   box-sizing: border-box;
   background: #fff;
+  align-items: center;
+
   /* justify-content: space-around; */
 }
 .sea-item {
+  line-height: 40px;
   background: #eee;
   /* border-radius: 5px; */
 }
 .city {
   flex-grow: 1;
+  padding: 0 5px;
+  border-right: 1px solid #ddd;
   /* width: 50px; */
 }
 .input {
+  padding: 0 5px;
   flex-grow: 3;
   /* width: 80%; */
 }
