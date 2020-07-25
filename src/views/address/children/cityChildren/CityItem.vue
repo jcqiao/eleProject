@@ -30,4 +30,44 @@ export default {
 </script>
 
 <style scoped>
+.city-item {
+  /* overflow: hidden; */
+  box-sizing: border-box;
+  width: 100%;
+  padding: 15px;
+  background: #fff;
+  height: calc(100% - 44px);
+}
+.title {
+  color: #aaa;
+  padding: 15px 0;
+  font-weight: 700;
+}
+.hot-wrap .hot-cities {
+  padding: 0 16px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.hot-wrap .hot-cities li {
+  width: 30%;
+  background: #f1f1f1;
+  margin: 0 10px 10px 0;
+  text-align: center;
+  padding: 10px;
+}
+.city_content li {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+.area_keys {
+  position: fixed;
+  right: 0;
+  top: 25%;
+  color: #aaa;
+  font-size: 12px;
+  line-height: 1.4;
+  text-align: center;
+  padding: 0 5px;
+}
 </style>
