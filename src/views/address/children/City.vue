@@ -8,7 +8,7 @@
       <button @click="$router.go(-1) ">取消</button>
     </div>
     <location :address="address"></location>
-    <city-item :hotCities="cityInfo.hotCities" :keys="keys"></city-item>
+    <city-item :cityInfo="cityInfo" :keysitem="keysitem"></city-item>
   </div>
 </template>
 
@@ -26,7 +26,7 @@ export default {
     return {
       value: "",
       cityInfo: {},
-      keys: []
+      keysitem: {}
     };
   },
   computed: {
@@ -47,10 +47,16 @@ export default {
         .then(res => {
           console.log(res.data);
           _this.cityInfo = res.data;
-          _this.keys = Object.keys(res.data);
-          _this.keys.pop();
-          _this.keys.sort();
-          // console.log(_this.keys);
+          console.log(typeof Object.keys(res.data));
+          console.log(Object.keys(res.data));
+
+          _this.keysitem = Object.keys(res.data);
+          console.log(typeof _this.keysitem);
+          _this.keysitem.pop();
+          console.log(typeof _this.keysitem);
+
+          _this.keysitem.sort();
+          console.log(typeof _this.keysitem);
         })
         .catch(err => {
           console.log(err);
