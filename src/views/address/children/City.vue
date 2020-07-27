@@ -7,11 +7,9 @@
       </div>
       <button @click="$router.go(-1) ">取消</button>
     </div>
-    <scroll class="content" ref="scroll" :probe-type="3" :pull-up-load="true">
-      <location :address="address"></location>
-
-      <city-item ref="cityScroll" :cityInfo="cityInfo" :keysitem="keysitem"></city-item>
-    </scroll>
+    <location :address="address"></location>
+    <!-- 在CityItem中做了scroll 方便进行联动 -->
+    <city-item ref="cityScroll" :cityInfo="cityInfo" :keysitem="keysitem"></city-item>
   </div>
 </template>
 
@@ -19,14 +17,14 @@
 import Location from "./Location";
 import CityItem from "./cityChildren/CityItem.vue";
 
-import scroll from "components/common/scroll/Scroll";
+// import scroll from "components/common/scroll/Scroll";
 
 export default {
   name: "City",
   components: {
     Location,
-    CityItem,
-    scroll
+    CityItem
+    // scroll
   },
   data() {
     return {
@@ -111,13 +109,5 @@ button {
   border: none;
   background: #fff;
   color: rgb(58, 133, 231);
-}
-.content {
-  position: absolute;
-  top: 45px;
-  bottom: 45px;
-  right: 0;
-  left: 0;
-  overflow: hidden;
 }
 </style>
