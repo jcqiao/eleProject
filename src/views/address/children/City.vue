@@ -8,7 +8,7 @@
       <button @click="$router.push({name:'address', params:{city:$route.params.city}})">取消</button>
     </div>
     <div v-if="searchLists.length === 0">
-      <location :address="address"></location>
+      <location @click="chooseCity({name: address})" :address="address"></location>
       <!-- 在CityItem中做了scroll 方便进行联动 -->
       <city-item
         @chooseCity="chooseCity"
@@ -89,9 +89,6 @@ export default {
         });
     },
     chooseCity(item) {
-      console.log(item.name);
-      this.city = item.name;
-      console.log(this.city);
       this.$router.push({
         name: "address",
         //左边必须是city因为Address中SearchCity中传入的就是city
