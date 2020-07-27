@@ -13,7 +13,7 @@
       </div>
     </keep-alive>
 
-    <location :address="address"></location>
+    <location :address="address" @addressClick="addressClick"></location>
 
     <div class="area">
       <ul v-for="(item,index) in addressLists " :key="index">
@@ -84,6 +84,11 @@ export default {
         name: "city",
         params: { city: this.city }
       });
+    },
+    addressClick() {
+      //在home组件中更改地址 需要更改vuex中的变量
+      this.$store.dispatch("setAddress", this.address);
+      this.$router.push("/home");
     }
   }
 };
