@@ -1,15 +1,17 @@
 <template>
   <div>
-    <div class="search">
-      <span class="city sea-item" @click="cityChange">
-        {{city}}
-        <i class="fa fa-angle-down"></i>
-      </span>
-      <div class="input sea-item">
-        <i class="fa fa-search"></i>
-        <input type="text" v-model="value" placeholder="住宅/公司" />
+    <keep-alive>
+      <div class="search">
+        <span class="city sea-item" @click="cityChange">
+          {{city}}
+          <i class="fa fa-angle-down"></i>
+        </span>
+        <div class="input sea-item">
+          <i class="fa fa-search"></i>
+          <input type="text" v-model="value" placeholder="住宅/公司" />
+        </div>
       </div>
-    </div>
+    </keep-alive>
 
     <location :address="address"></location>
 
@@ -78,7 +80,10 @@ export default {
       this.$router.push("/home");
     },
     cityChange() {
-      this.$router.push("/city");
+      this.$router.push({
+        name: "city",
+        params: { city: this.city }
+      });
     }
   }
 };
