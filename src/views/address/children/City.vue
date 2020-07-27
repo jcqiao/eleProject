@@ -9,7 +9,7 @@
     </div>
     <location :address="address"></location>
     <!-- 在CityItem中做了scroll 方便进行联动 -->
-    <city-item ref="cityScroll" :cityInfo="cityInfo" :keysitem="keysitem"></city-item>
+    <city-item @chooseCity="chooseCity" ref="cityScroll" :cityInfo="cityInfo" :keysitem="keysitem"></city-item>
   </div>
 </template>
 
@@ -65,6 +65,13 @@ export default {
         .catch(err => {
           console.log(err);
         });
+    },
+    chooseCity(item) {
+      this.$router.push({
+        name: "address",
+        //必须是city因为Address中SearchCity中传入的就是city
+        params: { city: item.name }
+      });
     }
   }
 };
