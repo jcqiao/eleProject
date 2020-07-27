@@ -5,7 +5,7 @@
         <i class="fa fa-search"></i>
         <input type="text" placeholder="城市" v-model="value" />
       </div>
-      <button @click="$router.go(-1)">取消</button>
+      <button @click="$router.push({name:'address', params:{city:$route.params.city}})">取消</button>
     </div>
     <div v-if="searchLists.length === 0">
       <location :address="address"></location>
