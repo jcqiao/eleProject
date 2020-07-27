@@ -7,9 +7,21 @@
       </div>
       <button @click="$router.go(-1) ">取消</button>
     </div>
-    <location :address="address"></location>
-    <!-- 在CityItem中做了scroll 方便进行联动 -->
-    <city-item @chooseCity="chooseCity" ref="cityScroll" :cityInfo="cityInfo" :keysitem="keysitem"></city-item>
+    <div v-if="searchLists.length === 0">
+      <location :address="address"></location>
+      <!-- 在CityItem中做了scroll 方便进行联动 -->
+      <city-item
+        @chooseCity="chooseCity"
+        ref="cityScroll"
+        :cityInfo="cityInfo"
+        :keysitem="keysitem"
+      ></city-item>
+    </div>
+    <div class="search-cities" v-else>
+      <ul v-for="(item,index) in searchLists" :key="index">
+        <li>{{item.name}}</li>
+      </ul>
+    </div>
   </div>
 </template>
 
