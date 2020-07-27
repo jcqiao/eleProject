@@ -1,27 +1,44 @@
 <template>
-  <div class="city-item" v-if="keysitem" ref="cityScroll">
-    <div class="hot-wrap">
-      <div class="title">热门城市</div>
-      <ul class="hot-cities" v-for="(item, index) in cityInfo.hotCities" :key="index">
-        <li>{{item.name}}</li>
-      </ul>
-    </div>
-    <div class="city_wrap">
-      <!-- 循环按字母排序的key -->
-      <div class="city_content citylist" v-for="(item,index) in keysitem" :key="index">
-        <div class="title">{{item}}</div>
-        <!-- 根据字母key展示城市名 -->
-        <ul>
-          <li v-for="(city,index) in cityInfo[item]" :key="index">{{city.name}}</li>
-        </ul>
+  <div>
+    <scroll class="content" ref="scroll" :probe-type="3" :pull-up-load="true">
+      <div class="city-item" v-if="keysitem" ref="cityScroll">
+        <div>
+          <div class="hot-wrap">
+            <div class="title">热门城市</div>
+            <ul class="hot-cities" v-for="(item, index) in cityInfo.hotCities" :key="index">
+              <li>{{item.name}}</li>
+            </ul>
+          </div>
+          <div class="city_wrap">
+            <!-- 循环按字母排序的key -->
+            <div class="city_content citylist" v-for="(item,index) in keysitem" :key="index">
+              <div class="title">{{item}}</div>
+              <!-- 根据字母key展示城市名 -->
+              <ul>
+                <li v-for="(city,index) in cityInfo[item]" :key="index">{{city.name}}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
+    </scroll>
+    <div class="keys-wrap">
+      <ul>
+        <li>#</li>
+        <li v-for="(item, index) in keysitem" :key="index">{{item}}</li>
+      </ul>
     </div>
   </div>
 </template>
 
 <script>
+import scroll from "components/common/scroll/Scroll";
+
 export default {
   name: "CityItem",
+  components: {
+    scroll
+  },
   props: {
     cityInfo: {},
     keysitem: {}
@@ -60,7 +77,15 @@ export default {
   padding: 10px;
   border-bottom: 1px solid #eee;
 }
-.area_keys {
+.content {
+  position: absolute;
+  top: 45px;
+  bottom: 45px;
+  right: 0;
+  left: 0;
+  overflow: hidden;
+}
+.keys-wrap {
   position: fixed;
   right: 0;
   top: 25%;
