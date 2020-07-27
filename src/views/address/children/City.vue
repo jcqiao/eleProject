@@ -40,6 +40,12 @@ export default {
       );
     }
   },
+  watch: {
+    value() {
+      // console.log(this.value);
+      this.searchCities();
+    }
+  },
   created() {
     this.getCityInfo();
   },
