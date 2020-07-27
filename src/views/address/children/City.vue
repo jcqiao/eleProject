@@ -19,7 +19,7 @@
     </div>
     <div class="search-cities" v-else>
       <ul v-for="(item,index) in searchLists" :key="index">
-        <li>{{item.name}}</li>
+        <li @click="citySelect(item.name)">{{item.name}}</li>
       </ul>
     </div>
   </div>
@@ -84,7 +84,7 @@ export default {
             console.log(key);
             _this.cityInfo[key].forEach(city => {
               _this.allCities.push(city);
-              console.log(_this.allCities);
+              // console.log(_this.allCities);
             });
           });
         })
@@ -97,6 +97,12 @@ export default {
         name: "address",
         //必须是city因为Address中SearchCity中传入的就是city
         params: { city: item.name }
+      });
+    },
+    citySelect(city) {
+      this.$router.push({
+        name: "address",
+        params: { city: city }
       });
     },
     searchCities() {
