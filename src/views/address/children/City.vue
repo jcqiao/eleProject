@@ -7,8 +7,11 @@
       </div>
       <button @click="$router.go(-1) ">取消</button>
     </div>
-    <location :address="address"></location>
-    <city-item :cityInfo="cityInfo" :keysitem="keysitem"></city-item>
+    <scroll class="content" ref="scroll" :probe-type="3" :pull-up-load="true">
+      <location :address="address"></location>
+
+      <city-item ref="cityScroll" :cityInfo="cityInfo" :keysitem="keysitem"></city-item>
+    </scroll>
   </div>
 </template>
 
@@ -16,11 +19,14 @@
 import Location from "./Location";
 import CityItem from "./cityChildren/CityItem.vue";
 
+import scroll from "components/common/scroll/Scroll";
+
 export default {
   name: "City",
   components: {
     Location,
-    CityItem
+    CityItem,
+    scroll
   },
   data() {
     return {
@@ -69,10 +75,10 @@ export default {
 <style scoped>
 .city {
   width: 100%;
-  height: 100%;
-  overflow: hidden;
+  /* height: 100%; */
+  overflow: auto;
   box-sizing: border-box;
-  padding-top: 45px;
+  margin-top: 45px;
 }
 .city-wrap {
   position: fixed;
@@ -84,6 +90,7 @@ export default {
   padding: 3px 16px;
   display: flex;
   justify-content: space-between;
+  z-index: 99;
 }
 .search {
   background-color: #eee;
@@ -104,5 +111,13 @@ button {
   border: none;
   background: #fff;
   color: rgb(58, 133, 231);
+}
+.content {
+  position: absolute;
+  top: 45px;
+  bottom: 45px;
+  right: 0;
+  left: 0;
+  overflow: hidden;
 }
 </style>
