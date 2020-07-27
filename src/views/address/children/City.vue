@@ -86,6 +86,15 @@ export default {
         //必须是city因为Address中SearchCity中传入的就是city
         params: { city: item.name }
       });
+    },
+    searchCities() {
+      if (this.value) {
+        this.searchLists = this.allCities.filter(item => {
+          return item.name.indexOf(this.value) !== -1;
+        });
+      } else {
+        this.searchLists = [];
+      }
     }
   }
 };
