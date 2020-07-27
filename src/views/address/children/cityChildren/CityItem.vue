@@ -1,5 +1,5 @@
 <template>
-  <div class="city-item" v-if="keysitem">
+  <div class="city-item" v-if="keysitem" ref="cityScroll">
     <div class="hot-wrap">
       <div class="title">热门城市</div>
       <ul class="hot-cities" v-for="(item, index) in cityInfo.hotCities" :key="index">
@@ -31,12 +31,12 @@ export default {
 
 <style scoped>
 .city-item {
-  /* overflow: hidden; */
+  overflow: hidden;
   box-sizing: border-box;
-  width: 100%;
   padding: 15px;
   background: #fff;
-  height: calc(100% - 44px);
+  /* height: calc(100% - 44px); */
+  margin-top: 15px;
 }
 .title {
   color: #aaa;
