@@ -17,20 +17,19 @@
 import Location from "./Location";
 import CityItem from "./cityChildren/CityItem.vue";
 
-// import scroll from "components/common/scroll/Scroll";
-
 export default {
   name: "City",
   components: {
     Location,
     CityItem
-    // scroll
   },
   data() {
     return {
       value: "",
       cityInfo: {},
-      keysitem: {}
+      keysitem: {},
+      allCities: [],
+      searchLists: []
     };
   },
   computed: {
@@ -61,6 +60,15 @@ export default {
 
           _this.keysitem.sort();
           console.log(typeof _this.keysitem);
+
+          //用keysitem将城市保存
+          _this.keysitem.forEach(key => {
+            console.log(key);
+            _this.cityInfo[key].forEach(city => {
+              _this.allCities.push(city);
+              console.log(_this.allCities);
+            });
+          });
         })
         .catch(err => {
           console.log(err);
@@ -116,5 +124,18 @@ button {
   border: none;
   background: #fff;
   color: rgb(58, 133, 231);
+}
+.search-cities {
+  width: 100%;
+  font-size: 18px;
+  box-sizing: border-box;
+  /* line-height: 24px; */
+}
+.search-cities li {
+  width: 100%;
+  height: 30px;
+  line-height: 30px;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
 }
 </style>
