@@ -5,7 +5,7 @@
         <i class="fa fa-search"></i>
         <input type="text" placeholder="城市" v-model="value" />
       </div>
-      <button @click="$router.go(-1) ">取消</button>
+      <button @click="$router.go(-1)">取消</button>
     </div>
     <div v-if="searchLists.length === 0">
       <location :address="address"></location>
@@ -19,7 +19,7 @@
     </div>
     <div class="search-cities" v-else>
       <ul v-for="(item,index) in searchLists" :key="index">
-        <li @click="citySelect(item.name)">{{item.name}}</li>
+        <li @click="chooseCity(item)">{{item.name}}</li>
       </ul>
     </div>
   </div>
@@ -41,7 +41,8 @@ export default {
       cityInfo: {},
       keysitem: {},
       allCities: [],
-      searchLists: []
+      searchLists: [],
+      city: ""
     };
   },
   computed: {
@@ -66,18 +67,13 @@ export default {
       const _this = this;
       this.$axios("/api/posts/cities")
         .then(res => {
-          console.log(res.data);
+          // console.log(res.data);
           _this.cityInfo = res.data;
-          console.log(typeof Object.keys(res.data));
-          console.log(Object.keys(res.data));
 
           _this.keysitem = Object.keys(res.data);
-          console.log(typeof _this.keysitem);
           _this.keysitem.pop();
-          console.log(typeof _this.keysitem);
 
           _this.keysitem.sort();
-          console.log(typeof _this.keysitem);
 
           //用keysitem将城市保存
           _this.keysitem.forEach(key => {
@@ -93,16 +89,13 @@ export default {
         });
     },
     chooseCity(item) {
+      console.log(item.name);
+      this.city = item.name;
+      console.log(this.city);
       this.$router.push({
         name: "address",
-        //必须是city因为Address中SearchCity中传入的就是city
+        //左边必须是city因为Address中SearchCity中传入的就是city
         params: { city: item.name }
-      });
-    },
-    citySelect(city) {
-      this.$router.push({
-        name: "address",
-        params: { city: city }
       });
     },
     searchCities() {
