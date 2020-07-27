@@ -2,30 +2,32 @@
   <div>
     <scroll class="content" ref="scroll" :probe-type="3" :pull-up-load="true">
       <div class="city-item" v-if="keysitem" ref="cityScroll">
-        <div>
-          <div class="hot-wrap">
-            <div class="title">热门城市</div>
-            <ul class="hot-cities" v-for="(item, index) in cityInfo.hotCities" :key="index">
-              <li>{{item.name}}</li>
+        <div class="hot-wrap citylist">
+          <div class="title">热门城市</div>
+          <ul class="hot-cities" v-for="(item, index) in cityInfo.hotCities" :key="index">
+            <li @click="chooseCity(item)">{{item.name}}</li>
+          </ul>
+        </div>
+        <div class="city_wrap">
+          <!-- 循环按字母排序的key -->
+          <div class="city_content citylist" v-for="(item,index) in keysitem" :key="index">
+            <div class="title">{{item}}</div>
+            <!-- 根据字母key展示城市名 -->
+            <ul>
+              <li
+                @click="chooseCity(city)"
+                v-for="(city,index) in cityInfo[item]"
+                :key="index"
+              >{{city.name}}</li>
             </ul>
-          </div>
-          <div class="city_wrap">
-            <!-- 循环按字母排序的key -->
-            <div class="city_content citylist" v-for="(item,index) in keysitem" :key="index">
-              <div class="title">{{item}}</div>
-              <!-- 根据字母key展示城市名 -->
-              <ul>
-                <li v-for="(city,index) in cityInfo[item]" :key="index">{{city.name}}</li>
-              </ul>
-            </div>
           </div>
         </div>
       </div>
     </scroll>
     <div class="keys-wrap">
       <ul>
-        <li>#</li>
-        <li v-for="(item, index) in keysitem" :key="index">{{item}}</li>
+        <li @click="selectCity(0)">#</li>
+        <li @click="selectCity(index+1)" v-for="(item, index) in keysitem" :key="index">{{item}}</li>
       </ul>
     </div>
   </div>
@@ -42,6 +44,20 @@ export default {
   props: {
     cityInfo: {},
     keysitem: {}
+  },
+  methods: {
+    selectCity(index) {
+      // scroll拿不到citylist
+      const cityList = this.$refs.cityScroll.getElementsByClassName("citylist");
+      console.log(cityList);
+      const el = cityList[index];
+      console.log(el);
+      this.$refs.scroll.scrollToElement(el);
+    },
+    chooseCity(item) {
+      // console.log(item);
+      this.$emit("chooseCity", item);
+    }
   }
 };
 </script>
