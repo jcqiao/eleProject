@@ -95,7 +95,7 @@ export default {
 }
 .content {
   position: absolute;
-  top: 45px;
+  top: 110px;
   bottom: 45px;
   right: 0;
   left: 0;

@@ -44,7 +44,9 @@ const routes = [
         path: 'city',
         name: 'city',
         component: () => import("../views/address/children/City.vue")
-      }
+      },
+
+
     ]
   },
 

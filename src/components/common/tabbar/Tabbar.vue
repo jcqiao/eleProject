@@ -43,6 +43,7 @@ a {
   right: 0;
   bottom: 0;
   top: auto;
+  z-index: 99;
 }
 .tab-item {
   flex: 1;

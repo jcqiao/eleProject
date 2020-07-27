@@ -1,5 +1,8 @@
 # ele-app
-
+## Abbrevation
+```
+COM component
+```
 ## Project setup
 ```
 npm install

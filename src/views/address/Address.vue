@@ -8,6 +8,7 @@
 <script>
 import NavBar from "components/common/navbar/NavBar";
 import SearchCity from "./children/SearchCity";
+
 export default {
   name: "Address",
   components: {
@@ -20,8 +21,9 @@ export default {
     };
   },
   beforeRouteEnter(to, from, next) {
-    console.log(to);
+    console.log(to.params.city);
     next(vm => {
+      //vm获取组件实例
       vm.city = to.params.city;
     });
   }

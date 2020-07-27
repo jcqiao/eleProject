@@ -28,6 +28,7 @@ export default {
 <style scoped>
 .navbar {
   width: 100%;
+  box-sizing: border-box;
   padding: 5px 10px;
   align-items: center;
   background: #009eef;

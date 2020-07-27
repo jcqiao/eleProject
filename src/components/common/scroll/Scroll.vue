@@ -48,8 +48,11 @@ export default {
     //       this.$emit("pullingUp");
     //     });
     //   }
-    // },
-    // methods: {
+  },
+  methods: {
+    scrollToElement(element, time = 300) {
+      this.scroll && this.scroll.scrollToElement(element, time);
+    }
     //   scrollTo(x, y, time = 300) {
     //     this.scroll && this.scroll.scrollTo(x, y, time);
     //   },
@@ -62,7 +65,6 @@ export default {
     //   },
     //   getScrollY() {
     //     return this.scroll ? this.scroll.y : 0;
-    //   }
   }
 };
 </script>
