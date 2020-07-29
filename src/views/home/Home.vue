@@ -15,9 +15,23 @@
     </div>
 
     <div id="container">
+      <!-- 轮播 -->
       <mt-swipe :auto="4000" class="swiper">
         <mt-swipe-item v-for="(img, index) in swipeImgs">
           <img :src="img" alt />
+        </mt-swipe-item>
+      </mt-swipe>
+      <!-- 分类 -->
+      <mt-swipe :auto="0" class="entries">
+        <mt-swipe-item class="entry_wrap" v-for="(entry, index) in entries" :key="index">
+          <div class="content_wrap">
+            <div class="food_wrap" v-for="(item, i) in entry" :key="i">
+              <div class="img_wrap">
+                <img :src="item.image" alt />
+              </div>
+              <span>{{item.name}}</span>
+            </div>
+          </div>
         </mt-swipe-item>
       </mt-swipe>
     </div>
@@ -31,6 +45,7 @@ export default {
   data() {
     return {
       swipeImgs: [],
+      entries: [],
     };
   },
   created() {
@@ -61,6 +76,7 @@ export default {
       this.$axios("/api/profile/shopping").then((res) => {
         console.log(res.data);
         this.swipeImgs = res.data.swipeImgs;
+        this.entries = res.data.entries;
         console.log(this.swipeImgs);
       });
     },
@@ -116,5 +132,26 @@ export default {
 .swiper img {
   width: 100%;
   height: 100%;
+}
+.entries {
+  width: 100%;
+  height: 48.2vw;
+  background: #fff;
+  font-size: 14px;
+  text-align: center;
+  overflow: hidden;
+}
+.content_wrap {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 100%;
+}
+.food_wrap {
+  width: 20%;
+  /* height: 40%; */
+}
+.food_wrap img {
+  width: 100%;
 }
 </style>
