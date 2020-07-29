@@ -35,6 +35,7 @@
         </mt-swipe-item>
       </mt-swipe>
     </div>
+    <div class="recommend">推荐商家</div>
   </div>
 </template>
 
@@ -153,5 +154,29 @@ export default {
 }
 .food_wrap img {
   width: 100%;
+}
+.recommend {
+  display: flex;
+  align-items: flex;
+  justify-content: center;
+  height: 9.6vw;
+  line-height: 9.6vw;
+  font-size: 16px;
+  color: #333;
+  background: #fff;
+}
+.recommend:before,
+.recommend:after {
+  display: block;
+  content: "一";
+  width: 5.333333vw;
+  height: 0.266667vw;
+  color: #999;
+}
+.recommend::before {
+  margin-right: 3.466667vw;
+}
+.recommend::after {
+  margin-left: 3.466667vw;
 }
 </style>
