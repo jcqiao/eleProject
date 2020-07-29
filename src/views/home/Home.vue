@@ -36,21 +36,31 @@
       </mt-swipe>
     </div>
     <div class="recommend">推荐商家</div>
+    <filter-view :filterData="filterData"></filter-view>
   </div>
 </template>
 
 <script>
 import { Swipe, SwipeItem } from "mint-ui";
+
+import FilterView from "components/content/filter/FilterView";
 export default {
   name: "Home",
+  components: {
+    FilterView,
+  },
   data() {
     return {
       swipeImgs: [],
       entries: [],
+      filterData: {},
     };
   },
   created() {
+    //获取轮播数据
     this.getData();
+    //获取过滤导航数据
+    this.getFilterData();
   },
   computed: {
     getAddress() {
@@ -75,10 +85,16 @@ export default {
     },
     getData() {
       this.$axios("/api/profile/shopping").then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         this.swipeImgs = res.data.swipeImgs;
         this.entries = res.data.entries;
-        console.log(this.swipeImgs);
+        // console.log(this.swipeImgs);
+      });
+    },
+    getFilterData() {
+      this.$axios("/api/profile/filter").then((res) => {
+        console.log(res);
+        this.filterData = res.data;
       });
     },
   },
