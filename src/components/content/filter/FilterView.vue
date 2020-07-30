@@ -29,6 +29,7 @@
         </li>
       </ul>
     </section>
+    <!-- 更多筛选 -->
     <section class="filter-extend" v-if="isFilter">
       <div class="filter-sort">
         <div class="morefilter" v-for="(item,index) in filterData.screenBy" :key="index">
@@ -70,6 +71,24 @@ export default {
       switch (index) {
         case 0:
           this.isSort = true;
+          this.$emit("searchFixed", true);
+          break;
+        case 1:
+          this.$emit("update", {
+            condition: this.filterData.navTab[index].condition,
+          });
+          this.hideView();
+          break;
+
+        case 2:
+          this.$emit("update", {
+            condition: this.filterData.navTab[index].condition,
+          });
+          this.hideView();
+          break;
+
+        case 3:
+          this.isFilter = true;
           this.$emit("searchFixed", true);
           break;
         default:
