@@ -1,6 +1,6 @@
 <template>
   <!-- 筛选 -->
-  <div :class="{'open':isSort }" @click.self="hideView">
+  <div :class="{'open':isSort || isFilter}" @click.self="hideView">
     <div class="filter" v-if="filterData">
       <aside class="filter_wrap">
         <div
@@ -28,6 +28,19 @@
           <i v-show="sortIndex === index" class="fa fa-check"></i>
         </li>
       </ul>
+    </section>
+    <section class="filter-extend" v-if="isFilter">
+      <div class="filter-sort">
+        <div class="morefilter" v-for="(item,index) in filterData.screenBy" :key="index">
+          <p class="title">{{item.title}}</p>
+          <ul>
+            <li v-for="(data,i) in item.data" :key="i" :class="{'selected':item.select}">
+              <img v-if="data.icon" :src="data.icon" alt />
+              <span>{{data.name}}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
     </section>
   </div>
 </template>
