@@ -49,7 +49,7 @@
         </div>
       </div>
       <div class="morefilter-btn">
-        <span :class="{'edit':edit}" class="morefilter-clear">清空</span>
+        <span :class="{'edit':edit}" class="morefilter-clear" @click="clearFilter">清空</span>
         <span class="morefilter-ok">确定</span>
       </div>
     </section>
@@ -145,6 +145,13 @@ export default {
       }
       data.select = !data.select;
       console.log(data.select);
+    },
+    clearFilter() {
+      this.filterData.screenBy.forEach((screen) => {
+        screen.data.forEach((data) => {
+          data.select = false;
+        });
+      });
     },
   },
 };
