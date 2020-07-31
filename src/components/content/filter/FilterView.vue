@@ -49,7 +49,7 @@
         </div>
       </div>
       <div class="morefilter-btn">
-        <span class="morefilter-clear">清空</span>
+        <span :class="{'edit':edit}" class="morefilter-clear">清空</span>
         <span class="morefilter-ok">确定</span>
       </div>
     </section>
@@ -74,6 +74,20 @@ export default {
       isFilter: false,
       sortIndex: 0,
     };
+  },
+  computed: {
+    edit() {
+      console.log("---");
+      let edit = false;
+      this.filterData.screenBy.forEach((screen) => {
+        screen.data.forEach((data) => {
+          if (data.select) {
+            edit = true;
+          }
+        });
+      });
+      return edit;
+    },
   },
   methods: {
     filterSort(index) {
