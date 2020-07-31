@@ -35,7 +35,13 @@
         <div class="morefilter" v-for="(item,index) in filterData.screenBy" :key="index">
           <p class="title">{{item.title}}</p>
           <ul>
-            <li v-for="(data,i) in item.data" :key="i" :class="{'selected':item.select}">
+            <li
+              v-for="(data,i) in item.data"
+              :key="i"
+              :class="{'selected':data.select}"
+              @click="selectScreen(data,item)"
+            >
+              <!-- data是为了获取是否多选  item是为了改变是否选中 item.select-->
               <img v-if="data.icon" :src="data.icon" alt />
               <span>{{data.name}}</span>
             </li>
@@ -112,6 +118,19 @@ export default {
       this.hideView();
       //更新数据
       this.$emit("update", { condition: item.code });
+    },
+    selectScreen(data, item) {
+      console.log("----");
+      // data是为了获取是否多选  item是为了改变是否选中 item.select
+      if (item.id !== "MPI") {
+        console.log(item.id);
+        //data参数是选中的那个li 要取消所有样式要遍历全部item.data
+        item.data.forEach((ele) => {
+          ele.select = false;
+        });
+      }
+      data.select = !data.select;
+      console.log(data.select);
     },
   },
 };
@@ -236,5 +255,13 @@ export default {
   color: #fff;
   background: #00d762;
   border: 0.133333vw solid #00d762;
+}
+.selected {
+  color: #3190e8 !important;
+  background-color: #edf5ff !important;
+}
+
+.edit {
+  color: #333 !important;
 }
 </style>
