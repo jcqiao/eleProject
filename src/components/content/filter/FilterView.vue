@@ -42,6 +42,10 @@
           </ul>
         </div>
       </div>
+      <div class="morefilter-btn">
+        <span class="morefilter-clear">清空</span>
+        <span class="morefilter-ok">确定</span>
+      </div>
     </section>
   </div>
 </template>
@@ -208,5 +212,29 @@ export default {
   height: 3.466667vw;
   vertical-align: middle;
   margin-right: 0.8vw;
+}
+.morefilter-btn {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #fafafa;
+  box-shadow: 0 -0.266667vw 0.533333vw 0 #ededed;
+  line-height: 11.466667vw;
+  box-sizing: border-box;
+}
+.morefilter-btn span {
+  font-size: 0.826667rem;
+  text-align: center;
+  text-decoration: none;
+  flex: 1;
+}
+.morefilter-clear {
+  color: #ddd;
+  background: #fff;
+}
+.morefilter-ok {
+  color: #fff;
+  background: #00d762;
+  border: 0.133333vw solid #00d762;
 }
 </style>
